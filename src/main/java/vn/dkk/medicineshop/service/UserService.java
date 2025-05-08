@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import vn.dkk.medicineshop.domain.User;
+import vn.dkk.medicineshop.domain.dto.RegisterDTO;
 import vn.dkk.medicineshop.repository.UserRepository;
 
 @Service
@@ -33,6 +34,15 @@ public class UserService {
 
     public void deleteAUser(long id) {
         this.userRepository.deleteById(id);
+    }
+
+    // mapper
+    public User registerDTOtoUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        user.setEmail(registerDTO.getEmail());
+        user.setPassword(registerDTO.getPassword());
+        return user;
     }
 
 }
