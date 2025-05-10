@@ -1,0 +1,353 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    background: #fafbfc;
+    color: #212121;
+}
+
+.header {
+    background: #1657a2;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    color: #fff;
+}
+
+.header__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 2vw 0 2vw;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.header__logo img {
+    height: 44px;
+}
+
+.header__search {
+    flex: 1;
+    margin: 0 2vw;
+    max-width: 540px;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+.header__search-icon {
+    color: #7a7a7a;
+    margin-right: 8px;
+}
+
+.header__search input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+    background: transparent;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header__icon {
+    font-size: 1.3rem;
+    color: #fff;
+    background: none;
+    border: none;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.header__user {
+    background: #fff;
+    color: #1657a2;
+    padding: 4px 16px;
+    border-radius: 999px;
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 1rem;
+    gap: 8px;
+}
+
+.header__user-icon {
+    font-size: 1.2em;
+}
+
+.breadcrumb {
+    background: #f7f7f7;
+    font-size: 0.98rem;
+    padding: 13px 8vw 13px 2vw;
+    color: #888;
+}
+
+.breadcrumb a {
+    color: #1657a2;
+    text-decoration: none;
+}
+
+.breadcrumb__current {
+    color: #222;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 2vw;
+}
+
+.container h1 {
+    font-size: 2rem;
+    color: #1d3c72;
+    margin: 32px 0 22px 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+    gap: 24px 32px;
+    background: none;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 8px 0 #0001;
+    padding: 20px 10px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 22px 0 #205fac37;
+}
+
+.product-card img {
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: #f6faff;
+}
+
+.product-name {
+    color: #353535;
+    font-size: 1.07rem;
+    margin-top: 2px;
+    font-weight: 400;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+/* === FOOTER === */
+.footer {
+    background: #114c8d;
+    color: #f4f8fb;
+    padding-top: 34px;
+    font-size: 1rem;
+}
+
+.footer__main {
+    display: flex;
+    gap: 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1vw 16px 1vw;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #2975c144;
+}
+
+.footer__col {
+    flex: 1 1 190px;
+    min-width: 185px;
+    margin-bottom: 26px;
+}
+
+.footer__brand img {
+    height: 38px;
+    margin-bottom: 7px;
+}
+
+.footer__slogan {
+    margin-top: 3px;
+    margin-bottom: 22px;
+    color: #6ec01a;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.footer__cert img {
+    filter: drop-shadow(0 2px 8px #0004);
+    margin-top: 9px;
+}
+
+.footer__contact ul,
+.footer__links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 13px 0;
+    color: #e1ecfa;
+    font-size: 0.97rem;
+}
+
+.footer__contact li,
+.footer__links li {
+    margin-bottom: 6px;
+}
+
+.footer__contact a,
+.footer__links a {
+    color: #81e3fa;
+    text-decoration: none;
+    transition: color 0.18s;
+}
+
+.footer__contact a:hover,
+.footer__links a:hover {
+    color: #6ec01a;
+}
+
+.footer__col h3 {
+    font-size: 1.08rem;
+    color: #fff;
+    margin-bottom: 12px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.footer__social {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.footer__icon img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff3;
+    transition: box-shadow 0.18s;
+}
+
+.footer__icon:hover img {
+    box-shadow: 0 3px 10px #6ec01a55;
+}
+
+.footer__meta {
+    background: #0c345d;
+    padding: 16px 1vw 15px 1vw;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 0.96em;
+}
+
+.footer__partners img {
+    margin-left: 12px;
+    vertical-align: middle;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px #0001;
+    padding: 0 5px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+
+    .header__top,
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .container h1 {
+        font-size: 1.25rem;
+        margin: 18px 0 12px 0;
+    }
+
+    .footer__main {
+        gap: 24px;
+    }
+
+    .footer__meta {
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 700px) {
+    .header__top {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    /* Không còn header__menu & menu-links */
+    .header__search {
+        width: 100%;
+        max-width: unset;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer__main {
+        flex-direction: column;
+        padding-right: 4vw;
+        padding-left: 4vw;
+    }
+
+    .footer__col {
+        min-width: unset;
+        margin-bottom: 18px;
+    }
+
+    .footer {
+        font-size: 0.98rem;
+    }
+}
+
+@media (max-width: 530px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 10px;
+    }
+
+    .product-card {
+        padding: 10px 3px 8px;
+    }
+
+    .container {
+        padding: 0 3px;
+    }
+
+    .breadcrumb {
+        padding-left: 6px;
+        padding-right: 2vw;
+        font-size: 0.87rem;
+    }
+
+    /* Không còn header__menu-btn */
+    .header__user {
+        font-size: 0.93rem;
+        padding: 2px 6px;
+    }
+}
