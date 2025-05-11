@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +27,14 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
     public UserController(
-            UserService userService, UploadService uploadService) {
+            UserService userService, UploadService uploadService,
+            PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @RequestMapping("/admin/user")
@@ -57,7 +61,8 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String createUserPage(Model model, @ModelAttribute("newUser") User dkk,
             @RequestParam("avatarFile") MultipartFile file) {
-
+        String hashPassword = this.passwordEncoder.encode(dkk.getPassword());
+        dkk.setPassword(hashPassword);
         this.userService.handleSaveUser(dkk);
         return "redirect:/admin/user";
     }
