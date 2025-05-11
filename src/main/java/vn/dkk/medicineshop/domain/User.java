@@ -2,8 +2,6 @@ package vn.dkk.medicineshop.domain;
 
 import java.sql.Date;
 
-import javax.management.relation.Role;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +18,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Role role;
+    private String role;
     private String phone;
     private String address;
     private Date created_at;
@@ -63,14 +61,6 @@ public class User {
         this.password = password;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -93,6 +83,14 @@ public class User {
 
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

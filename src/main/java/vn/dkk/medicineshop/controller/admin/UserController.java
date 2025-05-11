@@ -1,5 +1,9 @@
 package vn.dkk.medicineshop.controller.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -8,7 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.servlet.ServletContext;
 import vn.dkk.medicineshop.domain.User;
+import vn.dkk.medicineshop.service.UploadService;
 import vn.dkk.medicineshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,10 +25,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     private final UserService userService;
+    private final UploadService uploadService;
 
     public UserController(
-            UserService userService) {
+            UserService userService, UploadService uploadService) {
         this.userService = userService;
+        this.uploadService = uploadService;
     }
 
     @RequestMapping("/admin/user")
@@ -44,7 +55,9 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUserPage(Model model, @ModelAttribute("newUser") User dkk) {
+    public String createUserPage(Model model, @ModelAttribute("newUser") User dkk,
+            @RequestParam("avatarFile") MultipartFile file) {
+
         this.userService.handleSaveUser(dkk);
         return "redirect:/admin/user";
     }

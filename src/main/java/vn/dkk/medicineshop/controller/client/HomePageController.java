@@ -14,7 +14,6 @@ import vn.dkk.medicineshop.service.ProductService;
 import vn.dkk.medicineshop.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
