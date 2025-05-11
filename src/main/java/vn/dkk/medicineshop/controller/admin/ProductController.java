@@ -10,14 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.dkk.medicineshop.domain.Product;
 import vn.dkk.medicineshop.service.ProductService;
+import vn.dkk.medicineshop.service.UploadService;
+
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ProductController {
     private final ProductService productService;
+    private final UploadService uploadService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, UploadService uploadService) {
         this.productService = productService;
+        this.uploadService = uploadService;
     }
 
     // show pr list
@@ -36,7 +42,11 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String createProduct(@ModelAttribute("newProduct") Product pr) {
+    public String createProduct(@ModelAttribute("newProduct") Product pr,
+            @RequestParam("imageFile") MultipartFile file) {
+
+        String imgPr = this.uploadService.handleSaveUploadFile(file, "product");
+        pr.setImg(imgPr);
         this.productService.handleSavePr(pr);
         return "redirect:/admin/product";
     }

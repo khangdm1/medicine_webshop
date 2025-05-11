@@ -18,7 +18,7 @@ public class UploadService {
         this.servletContext = servletContext;
     }
 
-    public void handleSaveUploadFile(MultipartFile file, String targetFolder) {
+    public String handleSaveUploadFile(MultipartFile file, String targetFolder) {
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String finalName = "";
         try {
@@ -39,6 +39,7 @@ public class UploadService {
             // todo auto-generated catch block
             e.printStackTrace();
         }
+        return finalName;
     }
 
 }

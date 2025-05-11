@@ -17,9 +17,18 @@
                     <!-- Latest compiled JavaScript -->
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
+                    <!-- jquery upload image -->
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                    <!-- <link href="/css/demo.css" rel="stylesheet"> -->
+                    <script>
+                        $(document).ready(() => {
+                            const avatarFile = $("#imageFile");
+                            avatarFile.change(function (e) {
+                                const imgURL = URL.createObjectURL(e.target.files[0]);
+                                $("#imagePreview").attr("src", imgURL);
+                                $("#imagePreview").css({ "display": "block" });
+                            });
+                        });
+                    </script>
 
                 </head>
 
@@ -29,7 +38,8 @@
                             <div class="col-md-6 col-12 mx-auto">
                                 <h3>Create a product</h3>
                                 <hr />
-                                <form:form method="post" action="/admin/product/create" modelAttribute="newProduct">
+                                <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
+                                    enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label class="form-label">Name:</label>
                                         <form:input type="text" class="form-control" path="name" />
@@ -57,7 +67,15 @@
 
                                         <form:input type="text" class="form-control" path="create_at"
                                             value="${today}" />
-
+                                    </div>
+                                    <div class="mb-3 col-12 col-md-6">
+                                        <label for="imageFile" class="form-label">Image:</label>
+                                        <input class="form-control" type="file" id="imageFile"
+                                            accept=".png, .jpg, .jpeg" name="imageFile" />
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <img style="max-height: 250px; display: none;" alt="image preview"
+                                            id="imagePreview" />
                                     </div>
 
                                     <button type="submit" class="btn btn-primary">Create</button>

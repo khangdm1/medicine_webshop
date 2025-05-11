@@ -1,9 +1,6 @@
 package vn.dkk.medicineshop.controller.admin;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.servlet.ServletContext;
 import vn.dkk.medicineshop.domain.User;
 import vn.dkk.medicineshop.service.UploadService;
 import vn.dkk.medicineshop.service.UserService;
@@ -63,6 +59,9 @@ public class UserController {
             @RequestParam("avatarFile") MultipartFile file) {
         String hashPassword = this.passwordEncoder.encode(dkk.getPassword());
         dkk.setPassword(hashPassword);
+        // set date
+        Date currentDate = new Date(System.currentTimeMillis());
+        dkk.setCreated_at(currentDate);
         this.userService.handleSaveUser(dkk);
         return "redirect:/admin/user";
     }
