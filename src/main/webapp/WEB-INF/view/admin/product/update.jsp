@@ -9,6 +9,7 @@
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Update User</title>
+                <link rel="stylesheet" href="/admin/css/style.css">
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,49 +23,54 @@
             </head>
 
             <body>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-6 col-12 mx-auto">
-                            <h3>Update a user</h3>
-                            <hr />
-                            <form:form method="post" action="/admin/product/update" modelAttribute="currentProduct">
+                <jsp:include page="../layout/header.jsp" />
+                <div class="main-content">
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col-md-6 col-12 mx-auto">
+                                <h3>Update a user</h3>
+                                <hr />
+                                <form:form method="post" action="/admin/product/update" modelAttribute="currentProduct">
 
-                                <div class="mb-3" style="display: none;">
-                                    <label class="form-label">Id:</label>
-                                    <form:input type="text" class="form-control" path="id" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Name:</label>
-                                    <form:input type="text" class="form-control" path="name" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Description:</label>
-                                    <form:input type="text" class="form-control" path="description" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Manufacturer:</label>
-                                    <form:input type="text" class="form-control" path="manufacturer" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Price:</label>
-                                    <form:input type="text" class="form-control" path="price" />
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Create at:</label>
-                                    <jsp:useBean id="now" class="java.util.Date" scope="page" />
-                                    <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
+                                    <div class="mb-3" style="display: none;">
+                                        <label class="form-label">Id:</label>
+                                        <form:input type="text" class="form-control" path="id" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Name:</label>
+                                        <form:input type="text" class="form-control" path="name" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Description:</label>
+                                        <form:input type="text" class="form-control" path="description" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Manufacturer:</label>
+                                        <form:input type="text" class="form-control" path="manufacturer" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Price:</label>
+                                        <form:input type="text" class="form-control" path="price" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Create at:</label>
+                                        <jsp:useBean id="now" class="java.util.Date" scope="page" />
+                                        <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
 
-                                    <form:input type="text" class="form-control" path="create_at" value="${today}" />
+                                        <form:input type="text" class="form-control" path="create_at"
+                                            value="${today}" />
 
-                                </div>
+                                    </div>
 
-                                <button type="submit" class="btn btn-warning">Update</button>
-                            </form:form>
+                                    <button type="submit" class="btn btn-warning">Update</button>
+                                </form:form>
+                            </div>
+
                         </div>
-
                     </div>
-
                 </div>
+                <jsp:include page="../layout/footer.jsp" />
+
             </body>
 
             </html>

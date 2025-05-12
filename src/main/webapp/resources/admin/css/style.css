@@ -1,0 +1,167 @@
+/* --- ADMIN HEADER STYLE --- */
+.admin-header {
+    background: #1657a2;
+    color: #fff;
+    padding: 0;
+    box-shadow: 0 2px 12px #1d48683b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1020;
+    width: 100%;
+}
+
+.main-content,
+body>.container,
+body>.container-fluid {
+    margin-top: 84px !important;
+    /* hoặc đúng bằng chiều cao header */
+}
+
+.admin-header__inner {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    height: 68px;
+    justify-content: space-between;
+}
+
+.admin-header__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-title {
+    font-size: 1.17rem;
+    font-weight: 600;
+    color: #b4edfa;
+    letter-spacing: 0.03em;
+}
+
+.admin-header__iconbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-header__icon {
+    font-size: 1.16em;
+    background: #ebf6fa;
+    color: #186da2;
+    border-radius: 50%;
+    padding: 6px 8px;
+    cursor: pointer;
+    transition: background 0.17s;
+}
+
+.admin-header__icon:hover {
+    background: #b3f09e;
+}
+
+/* --- ADMIN FOOTER STYLE --- */
+.admin-footer {
+    background: #114c8d;
+    color: #f4f8fb;
+    padding: 24px 0 9px 0;
+    margin-top: 44px;
+    font-size: 0.99rem;
+    border-top: 2px solid #1657a299;
+}
+
+.admin-footer__wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.admin-footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2px;
+}
+
+.admin-footer__slogan {
+    color: #6ec01a;
+    font-weight: 600;
+    font-size: 0.98rem;
+}
+
+.admin-footer__info {
+    font-size: 0.97em;
+    margin-bottom: 2px;
+}
+
+.admin-footer__info a {
+    color: #f6fe93;
+    text-decoration: underline;
+}
+
+.admin-footer__copyright {
+    font-size: 0.92em;
+    color: #b0d0f1;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-footer__links img {
+    vertical-align: middle;
+    margin-left: 2px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+@media (max-width: 700px) {
+
+    .admin-header__inner,
+    .admin-footer__wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+    }
+
+    .admin-header__search {
+        margin: 12px 0;
+    }
+}
+
+/* Đẩy container nội dung xuống dưới header */
+body>.container,
+body>.container-fluid {
+    margin-top: 90px !important;
+}
+
+
+
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Wrapper cho nội dung chính */
+.main-content {
+    flex: 1 0 auto;
+}
+
+/* Footer luôn sát đáy */
+.admin-footer,
+.footer {
+    flex-shrink: 0;
+}

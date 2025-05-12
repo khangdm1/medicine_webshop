@@ -10,6 +10,7 @@
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>Create Products</title>
+                    <link rel="stylesheet" href="/admin/css/style.css">
                     <!-- Latest compiled and minified CSS -->
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
                         rel="stylesheet">
@@ -33,58 +34,62 @@
                 </head>
 
                 <body>
-                    <div class="container mt-5">
-                        <div class="row">
-                            <div class="col-md-6 col-12 mx-auto">
-                                <h3>Create a product</h3>
-                                <hr />
-                                <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
-                                    enctype="multipart/form-data">
-                                    <div class="mb-3">
-                                        <label class="form-label">Name:</label>
-                                        <form:input type="text" class="form-control" path="name" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Description:</label>
-                                        <form:input type="text" class="form-control" path="description" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Manufacturer:</label>
-                                        <form:input type="text" class="form-control" path="manufacturer" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Price:</label>
-                                        <form:input type="Price" class="form-control" path="price" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Amount:</label>
-                                        <form:input type="number" class="form-control" path="stock" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Create at:</label>
-                                        <jsp:useBean id="now" class="java.util.Date" scope="page" />
-                                        <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
+                    <jsp:include page="../layout/header.jsp" />
+                    <div class="main-content">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-6 col-12 mx-auto">
+                                    <h3>Create a product</h3>
+                                    <hr />
+                                    <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
+                                        enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label class="form-label">Name:</label>
+                                            <form:input type="text" class="form-control" path="name" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Description:</label>
+                                            <form:input type="text" class="form-control" path="description" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Manufacturer:</label>
+                                            <form:input type="text" class="form-control" path="manufacturer" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Price:</label>
+                                            <form:input type="Price" class="form-control" path="price" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Amount:</label>
+                                            <form:input type="number" class="form-control" path="stock" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Create at:</label>
+                                            <jsp:useBean id="now" class="java.util.Date" scope="page" />
+                                            <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd" />
 
-                                        <form:input type="text" class="form-control" path="create_at"
-                                            value="${today}" />
-                                    </div>
-                                    <div class="mb-3 col-12 col-md-6">
-                                        <label for="imageFile" class="form-label">Image:</label>
-                                        <input class="form-control" type="file" id="imageFile"
-                                            accept=".png, .jpg, .jpeg" name="imageFile" />
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <img style="max-height: 250px; display: none;" alt="image preview"
-                                            id="imagePreview" />
-                                    </div>
+                                            <form:input type="text" class="form-control" path="create_at"
+                                                value="${today}" />
+                                        </div>
+                                        <div class="mb-3 col-12 col-md-6">
+                                            <label for="imageFile" class="form-label">Image:</label>
+                                            <input class="form-control" type="file" id="imageFile"
+                                                accept=".png, .jpg, .jpeg" name="imageFile" />
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <img style="max-height: 250px; display: none;" alt="image preview"
+                                                id="imagePreview" />
+                                        </div>
 
-                                    <button type="submit" class="btn btn-primary">Create</button>
-                                </form:form>
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </form:form>
+                                </div>
+
                             </div>
 
                         </div>
-
                     </div>
+                    <jsp:include page="../layout/footer.jsp" />
                 </body>
 
                 </html>

@@ -9,6 +9,7 @@
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>User Detail ${id}</title>
+                <link rel="stylesheet" href="/admin/css/style.css">
                 <!-- Latest compiled and minified CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,35 +23,40 @@
             </head>
 
             <body>
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-12 mx-auto">
-                            <div class="d-flex justify-content-between">
-                                <h3>Product detail with id = ${id}</h3>
-                            </div>
-
-                            <hr />
-
-                            <div class="card" style="width: 60%">
-                                <div class="card-header">
-                                    Product information
+                <jsp:include page="../layout/header.jsp" />
+                <div class="main-content">
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col-12 mx-auto">
+                                <div class="d-flex justify-content-between">
+                                    <h3>Product detail with id = ${id}</h3>
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${product.id}</li>
-                                    <li class="list-group-item">Name: ${product.name}</li>
-                                    <li class="list-group-item">Description: ${product.description}</li>
-                                    <li class="list-group-item">Manufacturer: ${product.manufacturer}</li>
-                                    <li class="list-group-item">Price: ${product.price}</li>
-                                    <li class="list-group-item">Ngày tạo: ${product.create_at}</li>
-                                </ul>
+
+                                <hr />
+
+                                <div class="card" style="width: 60%">
+                                    <div class="card-header">
+                                        Product information
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">ID: ${product.id}</li>
+                                        <li class="list-group-item">Name: ${product.name}</li>
+                                        <li class="list-group-item">Description: ${product.description}</li>
+                                        <li class="list-group-item">Manufacturer: ${product.manufacturer}</li>
+                                        <li class="list-group-item">Price: ${product.price}</li>
+                                        <li class="list-group-item">Ngày tạo: ${product.create_at}</li>
+                                    </ul>
+                                </div>
+                                <a href="/admin/product" class="btn btn-success mt-3">Back</a>
+
                             </div>
-                            <a href="/admin/product" class="btn btn-success mt-3">Back</a>
 
                         </div>
 
                     </div>
-
                 </div>
+                <jsp:include page="../layout/footer.jsp" />
+
             </body>
 
             </html>
