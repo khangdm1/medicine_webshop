@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,8 @@ import vn.dkk.medicineshop.service.UploadService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class ProductController {
@@ -42,8 +46,18 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/create")
-    public String createProduct(@ModelAttribute("newProduct") Product pr,
+    public String createProduct(@ModelAttribute("newProduct") @Valid Product pr,
+            BindingResult newProductBindingResult,
             @RequestParam("imageFile") MultipartFile file) {
+
+        // validate
+        List<FieldError> errors = newProductBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(">>>>" + error.getField() + " - " + error.getDefaultMessage() + "<<<<");
+        }
+        if (newProductBindingResult.hasErrors()) {
+            return "admin/product/create";
+        }
 
         String imgPr = this.uploadService.handleSaveUploadFile(file, "product");
         pr.setImg(imgPr);

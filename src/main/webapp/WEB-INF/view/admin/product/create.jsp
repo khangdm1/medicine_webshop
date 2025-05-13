@@ -44,8 +44,14 @@
                                     <form:form method="post" action="/admin/product/create" modelAttribute="newProduct"
                                         enctype="multipart/form-data">
                                         <div class="mb-3">
+                                            <c:set var="errorName">
+                                                <form:errors path="name" cssClass="invalid-feedback" />
+                                            </c:set>
                                             <label class="form-label">Name:</label>
-                                            <form:input type="text" class="form-control" path="name" />
+                                            <form:input type="text"
+                                                class="form-control ${not empty errorName ? 'is-invalid' : ''}"
+                                                path="name" />
+                                            ${errorName}
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Description:</label>
@@ -56,8 +62,14 @@
                                             <form:input type="text" class="form-control" path="manufacturer" />
                                         </div>
                                         <div class="mb-3">
+                                            <c:set var="errorPrice">
+                                                <form:errors path="price" cssClass="invalid-feedback" />
+                                            </c:set>
                                             <label class="form-label">Price:</label>
-                                            <form:input type="Price" class="form-control" path="price" />
+                                            <form:input type="Price"
+                                                class="form-control ${not empty errorPrice ? 'is-invalid' : ''}"
+                                                path="price" />
+                                            ${errorPrice}
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Amount:</label>
@@ -72,9 +84,14 @@
                                                 value="${today}" />
                                         </div>
                                         <div class="mb-3 col-12 col-md-6">
+                                            <c:set var="errorImg">
+                                                <form:errors path="img" cssClass="invalid-feedback" />
+                                            </c:set>
                                             <label for="imageFile" class="form-label">Image:</label>
-                                            <input class="form-control" type="file" id="imageFile"
-                                                accept=".png, .jpg, .jpeg" name="imageFile" />
+                                            <input class="form-control ${not empty errorImg ? 'is-invalid' : ''}"
+                                                type="file" id="imageFile" accept=".png, .jpg, .jpeg"
+                                                name="imageFile" />
+                                            ${errorImg}
                                         </div>
                                         <div class="col-12 mb-3">
                                             <img style="max-height: 250px; display: none;" alt="image preview"
