@@ -64,10 +64,6 @@ public class UserController {
             @RequestParam("avatarFile") MultipartFile file) {
 
         // validate data
-        List<FieldError> errors = newUserBindingResult.getFieldErrors();
-        for (FieldError error : errors) {
-            System.out.println(">>>>" + error.getField() + " - " + error.getDefaultMessage() + "<<<<");
-        }
         if (newUserBindingResult.hasErrors()) {
             return "admin/user/create";
         }

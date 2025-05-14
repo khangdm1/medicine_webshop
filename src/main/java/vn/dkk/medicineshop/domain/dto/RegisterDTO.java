@@ -1,5 +1,8 @@
 package vn.dkk.medicineshop.domain.dto;
 
+import vn.dkk.medicineshop.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;
