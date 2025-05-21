@@ -1,11 +1,15 @@
 package vn.dkk.medicineshop.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -33,7 +37,65 @@ public class User {
     private String role;
     private String phone;
     private String address;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     private Date created_at;
+
+    public List<ChatbotQuery> getChatbotQueries() {
+        return chatbotQueries;
+    }
+
+    public void setChatbotQueries(List<ChatbotQuery> chatbotQueries) {
+        this.chatbotQueries = chatbotQueries;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    // chatbot_queries-users N-1
+    @OneToMany(mappedBy = "user")
+    List<ChatbotQuery> chatbotQueries;
+
+    // reviews-users N-1
+    @OneToMany(mappedBy = "user")
+    List<Review> reviews;
+
+    // users-orders 1-N
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
+
+    // users-cart 1-1
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     public long getId() {
         return id;

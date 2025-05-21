@@ -83,9 +83,15 @@ public class ProductController {
     }
 
     @PostMapping("/admin/product/update")
-    public String postUpdateProduct(@ModelAttribute("currentProduct") Product pr) {
+    public String postUpdateProduct(@ModelAttribute("currentProduct") Product pr,
+            @RequestParam("imageFile") MultipartFile file) {
         Product currentPr = this.productService.getProductById(pr.getId());
         if (currentPr != null) {
+
+            // update new image
+            String img = this.uploadService.handleSaveUploadFile(file, "product");
+
+            currentPr.setImg(img);
             currentPr.setName(pr.getName());
             currentPr.setDescription(pr.getDescription());
             currentPr.setManufacturer(pr.getManufacturer());

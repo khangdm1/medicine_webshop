@@ -1,9 +1,12 @@
 package vn.dkk.medicineshop.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,8 +18,20 @@ public class Category {
     private long id;
     private String name;
 
+    // categotery-product 1-N
+    @OneToMany(mappedBy = "category")
+    List<Product> products;
+
     public long getId() {
         return id;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

@@ -1,131 +1,218 @@
-// ======= 1. SHOW/HIDE MENU DẠNG MOBILE =========
-const menuBtn = document.querySelector('.header__menu-btn');
-const menuLinks = document.querySelector('.header__menu-links');
-if (menuBtn && menuLinks) {
-    menuBtn.addEventListener('click', function () {
-        menuLinks.classList.toggle('menu-active');
-        menuBtn.classList.toggle('menu-opened');
-    });
-    // Đóng menu khi click ra ngoài (mobile)
-    document.addEventListener('click', function (e) {
-        if (!menuLinks.contains(e.target) && !menuBtn.contains(e.target)) {
-            menuLinks.classList.remove('menu-active');
-            menuBtn.classList.remove('menu-opened');
+(function ($) {
+    "use strict";
+
+    // Spinner
+    var spinner = function () {
+        setTimeout(function () {
+            if ($('#spinner').length > 0) {
+                $('#spinner').removeClass('show');
+            }
+        }, 1);
+    };
+    spinner(0);
+
+
+    // Fixed Navbar
+    $(window).scroll(function () {
+        if ($(window).width() < 992) {
+            if ($(this).scrollTop() > 55) {
+                $('.fixed-top').addClass('shadow');
+            } else {
+                $('.fixed-top').removeClass('shadow');
+            }
+        } else {
+            if ($(this).scrollTop() > 55) {
+                $('.fixed-top').addClass('shadow').css('top', 0);
+            } else {
+                $('.fixed-top').removeClass('shadow').css('top', 0);
+            }
         }
     });
-}
 
-// ======= 2. NÚT CUỘN LÊN ĐẦU TRANG =========
-const scrollBtn = document.createElement('button');
-scrollBtn.className = 'scroll-top-btn';
-scrollBtn.innerHTML = '↑';
-scrollBtn.title = 'Lên đầu trang';
-document.body.appendChild(scrollBtn);
-scrollBtn.style.display = 'none';
 
-window.addEventListener('scroll', function () {
-    if (window.scrollY > 160) {
-        scrollBtn.style.display = 'block';
-    } else {
-        scrollBtn.style.display = 'none';
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
+    });
+    $('.back-to-top').click(function () {
+        $('html, body').animate({ scrollTop: 0 }, 1500, 'easeInOutExpo');
+        return false;
+    });
+
+
+    // Testimonial carousel
+    $(".testimonial-carousel").owlCarousel({
+        autoplay: true,
+        smartSpeed: 2000,
+        center: false,
+        dots: true,
+        loop: true,
+        margin: 25,
+        nav: true,
+        navText: [
+            '<i class="bi bi-arrow-left"></i>',
+            '<i class="bi bi-arrow-right"></i>'
+        ],
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1
+            },
+            768: {
+                items: 1
+            },
+            992: {
+                items: 2
+            },
+            1200: {
+                items: 2
+            }
+        }
+    });
+
+
+    // vegetable carousel
+    $(".vegetable-carousel").owlCarousel({
+        autoplay: true,
+        smartSpeed: 1500,
+        center: false,
+        dots: true,
+        loop: true,
+        margin: 25,
+        nav: true,
+        navText: [
+            '<i class="bi bi-arrow-left"></i>',
+            '<i class="bi bi-arrow-right"></i>'
+        ],
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            992: {
+                items: 3
+            },
+            1200: {
+                items: 4
+            }
+        }
+    });
+
+
+    // Modal Video
+    $(document).ready(function () {
+        var $videoSrc;
+        $('.btn-play').click(function () {
+            $videoSrc = $(this).data("src");
+        });
+        console.log($videoSrc);
+
+        $('#videoModal').on('shown.bs.modal', function (e) {
+            $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+        })
+
+        $('#videoModal').on('hide.bs.modal', function (e) {
+            $("#video").attr('src', $videoSrc);
+        })
+    });
+
+
+
+    // Product Quantity
+    // $('.quantity button').on('click', function () {
+    //     var button = $(this);
+    //     var oldValue = button.parent().parent().find('input').val();
+    //     if (button.hasClass('btn-plus')) {
+    //         var newVal = parseFloat(oldValue) + 1;
+    //     } else {
+    //         if (oldValue > 0) {
+    //             var newVal = parseFloat(oldValue) - 1;
+    //         } else {
+    //             newVal = 0;
+    //         }
+    //     }
+    //     button.parent().parent().find('input').val(newVal);
+    // });
+    $('.quantity button').on('click', function () {
+        let change = 0;
+
+        var button = $(this);
+        var oldValue = button.parent().parent().find('input').val();
+        if (button.hasClass('btn-plus')) {
+            var newVal = parseFloat(oldValue) + 1;
+            change = 1;
+        } else {
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+                change = -1;
+            } else {
+                newVal = 1;
+            }
+        }
+        const input = button.parent().parent().find('input');
+        input.val(newVal);
+
+        //get price
+        const price = input.attr("data-cart-detail-price");
+        const id = input.attr("data-cart-detail-id");
+
+        const priceElement = $(`p[data-cart-detail-id='${id}']`);
+        if (priceElement) {
+            const newPrice = +price * newVal;
+            priceElement.text(formatCurrency(newPrice.toFixed(2)) + " đ");
+        }
+
+        //update total cart price
+        const totalPriceElement = $(`p[data-cart-total-price]`);
+
+        if (totalPriceElement && totalPriceElement.length) {
+            const currentTotal = totalPriceElement.first().attr("data-cart-total-price");
+            let newTotal = +currentTotal;
+            if (change === 0) {
+                newTotal = +currentTotal;
+            } else {
+                newTotal = change * (+price) + (+currentTotal);
+            }
+
+            //reset change
+            change = 0;
+
+            //update
+            totalPriceElement?.each(function (index, element) {
+                //update text
+                $(totalPriceElement[index]).text(formatCurrency(newTotal.toFixed(2)) + " đ");
+
+                //update data-attribute
+                $(totalPriceElement[index]).attr("data-cart-total-price", newTotal);
+            });
+        }
+    });
+
+    function formatCurrency(value) {
+        // Use the 'vi-VN' locale to format the number according to Vietnamese currency format
+        // and 'VND' as the currency type for Vietnamese đồng
+        const formatter = new Intl.NumberFormat('vi-VN', {
+            style: 'decimal',
+            minimumFractionDigits: 0, // No decimal part for whole numbers
+        });
+
+        let formatted = formatter.format(value);
+        // Replace dots with commas for thousands separator
+        formatted = formatted.replace(/\./g, ',');
+        return formatted;
     }
-});
-scrollBtn.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 
-// ======= 3. HIỆU ỨNG FOCUS THANH TÌM KIẾM =========
-const searchInput = document.querySelector('.header__search input');
-const searchBox = document.querySelector('.header__search');
-if (searchInput && searchBox) {
-    searchInput.addEventListener('focus', () => {
-        searchBox.classList.add('searching');
-        // Nếu mobile, tự scroll search box
-        if (window.innerWidth < 760) searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-    searchInput.addEventListener('blur', () => {
-        searchBox.classList.remove('searching');
-    });
-}
-
-// ======= 4. EFFECT VỚI PRODUCT CARD =========
-const cards = document.querySelectorAll('.product-card');
-cards.forEach(card => {
-    // Hiệu ứng nhấn vào
-    card.addEventListener('mousedown', () => {
-        card.classList.add('active');
-    });
-    card.addEventListener('mouseup', () => {
-        card.classList.remove('active');
-    });
-    card.addEventListener('mouseleave', () => {
-        card.classList.remove('active');
-    });
-    // Tooltip "Xem chi tiết"
-    card.addEventListener('mouseenter', function (e) {
-        let tt = document.createElement('div');
-        tt.className = 'product-tooltip';
-        tt.innerText = 'Xem chi tiết';
-        card.appendChild(tt);
-        setTimeout(() => tt.classList.add('show'), 10);
-    });
-    card.addEventListener('mouseleave', function (e) {
-        const tool = card.querySelector('.product-tooltip');
-        if (tool) card.removeChild(tool);
-    });
-});
-
-// ===== CSS động thêm: =====
-const style = document.createElement('style');
-style.innerHTML = `
-/* Nút cuộn lên đầu */
-.scroll-top-btn {
-  position: fixed; bottom: 30px; right: 21px; z-index: 999;
-  background: #1657a2; color: #fff; border: none;
-  width: 46px; height: 46px;
-  border-radius: 50%; font-size: 2rem; box-shadow: 0 2px 8px #0002;
-  cursor: pointer; transition: background 0.19s, box-shadow 0.19s;
-}
-.scroll-top-btn:hover { background: #6ec01a; color: #fff; box-shadow: 0 6px 24px #6ec01a40; }
-/* Hiệu ứng focus search */
-.header__search.searching { box-shadow: 0 0 0 3px #6ec01a48; border: 1.5px solid #6ec01a; }
-/* Menu show ở mobile */
-@media (max-width: 850px) {
-  .header__menu-links {
-    position: absolute; left: 5px; right: 5px;
-    background: #155cb3; top: 100%; z-index: 20;
-    border-radius: 7px; box-shadow: 0 6px 18px #0001;
-    display: none; flex-direction: column; gap: 0 !important;
-  }
-  .header__menu-links.menu-active {
-    display: flex;
-  }
-  .header__menu-btn.menu-opened {
-    background: #ebf6e8;
-    color: #3c7a33;
-  }
-}
-/* Hiệu ứng product-card */
-.product-card.active {
-  box-shadow: 0 6px 36px 0 #2975c160;
-  transform: scale(0.98);
-  transition: all 0.15s;
-}
-.product-tooltip {
-  position: absolute;
-  left: 50%; bottom: 17px;
-  transform: translateX(-50%) scale(0.8);
-  padding: 4.5px 16px;
-  font-size: 0.97em;
-  background: #1657a2; border-radius: 7px;
-  color: #fff;
-  pointer-events: none;
-  opacity: 0;
-  transition: all 0.2s;
-  z-index: 25;
-  white-space: nowrap;
-}
-.product-tooltip.show { opacity: 1; transform: translateX(-50%) scale(1); }
-.product-card { position: relative; }
-`;
-document.head.appendChild(style);
+})(jQuery);

@@ -1,0 +1,91 @@
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 50px;
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(40, 54, 100, 0.10);
+    padding: 24px 12px 10px 12px;
+    transform: translateY(15px);
+    z-index: 10;
+    animation: fade-down 0.17s ease-out;
+}
+
+@keyframes fade-down {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY();
+    }
+}
+
+.user-dropdown__avatar {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 8px auto;
+    display: block;
+    border: 2px solid #e7eef4;
+}
+
+.user-dropdown__username {
+    text-align: center;
+    color: #565e6c;
+    font-weight: 500;
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.user-dropdown__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 0;
+}
+
+.user-dropdown__menu a {
+    color: #283664;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 5px 0 5px 12px;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+    border-radius: 4px;
+}
+
+.user-dropdown__menu a:hover {
+    color: #0076BE;
+    background: #f5f6fa;
+}
+
+.user-dropdown__divider {
+    height: 1px;
+    background: #e5e9f2;
+    margin: 13px 0 5px 0;
+}
+
+.user-dropdown__logout {
+    color: #DA3333;
+    font-size: 15px;
+    text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 0 12px 12px;
+    width: 100%;
+    border-radius: 4px;
+    transition: background 0.14s, color 0.14s;
+}
+
+.user-dropdown__logout:hover {
+    color: #DA3333;
+    background: #f5f6fa;
+    /* xám nhạt */
+}

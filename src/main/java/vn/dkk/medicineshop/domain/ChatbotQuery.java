@@ -6,22 +6,36 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "chatbot_queries")
-public class ChatbotQueries {
+public class ChatbotQuery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // @Column(columnDefinition = "MEDIUMTEXT")
     private String query;
 
-    // @Column(columnDefinition = "MEDIUMTEXT")
     private String response;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private Date created_at;
+
+    // chatbot_queries-users N-1
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public long getId() {
         return id;
