@@ -6,7 +6,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Trang chủ - MedicineWebShop</title>
+                <title>Trang chủ - Medicine Shop</title>
 
                 <!-- Google Web Fonts -->
                 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,10 +47,6 @@
 
                 <jsp:include page="../layout/banner.jsp" />
 
-
-
-
-                <!-- Fruits Shop Start-->
                 <div class="container-fluid fruite py-5">
                     <div class="container py-5">
                         <div class="tab-class text-center">
@@ -123,9 +119,33 @@
                         </div>
                     </div>
                 </div>
-                <!-- Fruits Shop End-->
-
+                <!--Shop End-->
+                <a href="/chatbox" style="
+                        position: fixed;
+                        bottom: 100px;
+                        right: 30px;
+                        width: 60px;
+                        height: 60px;
+                        background-color: #4CAF50;
+                        color: white;
+                        font-weight: bold;
+                        font-family: Arial, sans-serif;
+                        font-size: 18px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                        transition: background-color 0.3s, box-shadow 0.3s;
+                        z-index: 9999;
+                    "
+                    onmouseover="this.style.backgroundColor='#66BB6A'; this.style.boxShadow='0 0 12px rgba(102,187,106,0.8)'"
+                    onmouseout="this.style.backgroundColor='#4CAF50'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">
+                    CHAT
+                </a>
                 <jsp:include page="../layout/feature.jsp" />
+
 
                 <jsp:include page="../layout/footer.jsp" />
 

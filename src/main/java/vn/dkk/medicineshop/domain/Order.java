@@ -22,6 +22,33 @@ public class Order {
     private double totalPrice;
     private String status;
     private Date created_at;
+    private String receiverAddress;
+    private String receiverPhone;
+    private String receiverName;
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
+
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
 
     // users-orders 1-N
     @ManyToOne

@@ -61,14 +61,16 @@ public class SecurityConfiguration {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD,
                                 DispatcherType.INCLUDE)
+
                         .permitAll()
 
                         // user
                         .requestMatchers("/", "/login", "/client/**", "/product/**", "/css/**", "/js/**",
-                                "/images/**", "/register/**")
+                                "/images/**", "/chatbox/**", "/register/**")
 
                         .permitAll()
 

@@ -1,0 +1,85 @@
+/* Layout tổng thể */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4fef6;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Tiêu đề */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 30px;
+}
+
+/* Khung chat */
+#chat-history {
+    max-width: 800px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #c8e6c9;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+/* Tin nhắn người dùng */
+#chat-history p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+#chat-history p strong {
+    color: #388E3C;
+}
+
+/* Input và nút gửi */
+#query {
+    width: 70%;
+    max-width: 600px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    outline: none;
+    margin-right: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 11px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #66BB6A;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    #query {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+.chat-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}

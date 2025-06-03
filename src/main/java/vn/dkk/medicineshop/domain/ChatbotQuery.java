@@ -20,6 +20,14 @@ public class ChatbotQuery {
 
     private String query;
 
+    public ChatbotQuery(String query, String response) {
+        this.query = query;
+        this.response = response;
+    }
+
+    public ChatbotQuery() {
+    }
+
     private String response;
 
     public User getUser() {
