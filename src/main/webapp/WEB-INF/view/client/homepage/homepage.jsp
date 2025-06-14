@@ -119,40 +119,70 @@
                         </div>
                     </div>
                 </div>
-                <!--Shop End-->
-                <a href="/chatbox" style="
-                        position: fixed;
-                        bottom: 100px;
-                        right: 30px;
-                        width: 60px;
-                        height: 60px;
-                        background-color: #4CAF50;
-                        color: white;
-                        font-weight: bold;
-                        font-family: Arial, sans-serif;
-                        font-size: 18px;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-decoration: none;
-                        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-                        transition: background-color 0.3s, box-shadow 0.3s;
-                        z-index: 9999;
-                    "
+
+                <div style="text-align: center;">
+                    <h1>Trải nghiệm khách hàng</h1>
+                </div>
+
+
+                <button id="chatButton" style="
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 60px;
+                    height: 60px;
+                    background-color: #4CAF50;
+                    color: white;
+                    font-weight: bold;
+                    font-family: Arial, sans-serif;
+                    font-size: 18px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                    transition: background-color 0.3s, box-shadow 0.3s;
+                    z-index: 9999;"
                     onmouseover="this.style.backgroundColor='#66BB6A'; this.style.boxShadow='0 0 12px rgba(102,187,106,0.8)'"
                     onmouseout="this.style.backgroundColor='#4CAF50'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">
                     CHAT
-                </a>
+                </button>
+
+                <a href="#" id="backToTop" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"
+                    style="
+                        position: fixed;
+                        bottom: 30px;
+                        right: 100px; 
+                        width: 45px;
+                        height: 45px;
+                        display: none; 
+                        align-items: center;
+                        justify-content: center;
+                        z-index: 9998;"><i class="fa fa-arrow-up"></i></a>
+
+                <div id="chatPopup" style="
+                        display: none;
+                        position: fixed;
+                        bottom: 100px;
+                        right: 30px;
+                        width: 480px;
+                        height: 500px;
+                        background-color: white;
+                        border: 1px solid #ccc;
+                        border-radius: 10px;
+                        z-index: 9997;
+                        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+                        overflow: hidden;
+                    ">
+                    <iframe src="/chatbox" width="100%" height="100%" frameborder="0"></iframe>
+
+                </div>
+
                 <jsp:include page="../layout/feature.jsp" />
 
 
                 <jsp:include page="../layout/footer.jsp" />
 
-
-                <!-- Back to Top -->
-                <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-                        class="fa fa-arrow-up"></i></a>
 
 
                 <!-- JavaScript Libraries -->
@@ -165,6 +195,32 @@
 
                 <!-- Template Javascript -->
                 <script src="/client/js/main.js"></script>
+                <script>
+                    // Hiển thị/ẩn nút back-to-top khi cuộn trang
+                    window.addEventListener('scroll', function () {
+                        const backToTop = document.getElementById('backToTop');
+                        if (window.scrollY > 200) {
+                            backToTop.style.display = 'flex';
+                        } else {
+                            backToTop.style.display = 'none';
+                        }
+                    });
+
+                    // Cuộn lên đầu trang khi bấm nút back-to-top
+                    document.getElementById('backToTop').addEventListener('click', function (e) {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+
+                    // Mở/tắt popup chat
+                    document.getElementById("chatButton").addEventListener("click", function () {
+                        const popup = document.getElementById("chatPopup");
+                        popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
+                    });
+                </script>
+
+
+
             </body>
 
             </html>

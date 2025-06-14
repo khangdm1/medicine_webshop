@@ -40,4 +40,11 @@ public class OrderService {
         }
         this.orderRepository.deleteById(id);
     }
+
+    public void updateOrder(Order order) {
+        Order currentOrder = this.getOrderById(order.getId());
+        currentOrder.setStatus(order.getStatus());
+        this.orderRepository.save(currentOrder);
+    }
+
 }

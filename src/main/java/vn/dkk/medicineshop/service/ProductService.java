@@ -2,7 +2,12 @@ package vn.dkk.medicineshop.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityManager;
@@ -140,15 +145,12 @@ public class ProductService {
             String receiverName,
             String receiverAddress,
             String receiverPhone) {
-
         // create orderdetail
         // get cart by user
         Cart cart = this.cartRepository.findByUser(user);
         if (cart != null) {
             List<CartDetail> cartDetails = cart.getCartDetails();
-
             if (cartDetails != null) {
-
                 // create order
                 Order order = new Order();
                 order.setUser(user);
@@ -162,7 +164,6 @@ public class ProductService {
                 }
                 order.setTotalPrice(sum);
                 order = this.orderRepository.save(order);
-
                 // order detail
                 for (CartDetail cd : cartDetails) {
                     OrderDetail orderDetail = new OrderDetail();
@@ -172,20 +173,67 @@ public class ProductService {
                     orderDetail.setQuantity(cd.getQuantity());
                     this.orderDetailRepository.save(orderDetail);
                 }
-
                 // delete cart detail
                 for (CartDetail cd : cartDetails) {
                     this.cartDetailRepository.deleteById(cd.getId());
                 }
-
             }
-
-            // delete reference
             cart.getCartDetails().clear();
             cart.setSum(0);
             this.cartRepository.save(cart);
             session.setAttribute("sum", 0);
 
         }
+    }
+
+    public List<Product> searchProductsForChatbot(String keyword) {
+        return this.productRepository.searchByKeyword(keyword);
+    }
+
+    public String getShopInfo() {
+        return "Tên cửa hàng của chúng ta là Nhà thuốc DKK, chuyên cung cấp các sản phẩm y tế và dược phẩm chất lượng cao.";
+    }
+
+    public String listAvailableProductsSummary() {
+        List<Product> products = this.productRepository.findAll();
+        long totalProducts = products.size();
+
+        if (totalProducts == 0) {
+            return "Hiện tại cửa hàng chưa có sản phẩm nào.";
+        }
+
+        // Chỉ liệt kê 5 tên sản phẩm đầu tiên để tóm tắt
+        String summaryList = products.stream().limit(5)
+                .map(Product::getName)
+                .collect(Collectors.joining(", "));
+
+        return String.format(
+                "Cửa hàng hiện đang có tổng cộng %d loại sản phẩm. Một vài sản phẩm tiêu biểu là: %s...",
+                totalProducts,
+                summaryList);
+    }
+
+    public String getProductDetails(String productName) {
+        // Tận dụng lại hàm tìm kiếm đã có
+        List<Product> products = productRepository.searchByKeyword(productName);
+
+        if (products.isEmpty()) {
+            return "Xin lỗi, tôi không tìm thấy sản phẩm nào có tên gần giống '" + productName + "' trong cửa hàng.";
+        }
+
+        // Lấy sản phẩm đầu tiên tìm được để hiển thị chi tiết
+        Product p = products.get(0);
+        return String.format(
+                "Thông tin chi tiết về sản phẩm '%s': [Mô tả: %s], [Giá bán: %,.0fđ].",
+                p.getName(),
+                p.getDescription(),
+                p.getPrice());
+    }
+
+    public List<Product> filterSuggestedProducts(List<String> suggestedNames) {
+        if (suggestedNames == null || suggestedNames.isEmpty()) {
+            return new java.util.ArrayList<>();
+        }
+        return this.productRepository.findByNameIn(suggestedNames);
     }
 }

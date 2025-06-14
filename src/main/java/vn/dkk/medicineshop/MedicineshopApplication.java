@@ -2,11 +2,17 @@ package vn.dkk.medicineshop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-// @SpringBootApplication(exclude =
-// org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class)
-public class MedicineshopApplication {
+
+public class MedicineshopApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(MedicineshopApplication.class);
+	}
 
 	public static void main(String[] args) {
 

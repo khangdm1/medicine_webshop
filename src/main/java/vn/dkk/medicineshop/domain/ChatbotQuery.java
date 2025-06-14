@@ -2,11 +2,13 @@ package vn.dkk.medicineshop.domain;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -28,6 +30,8 @@ public class ChatbotQuery {
     public ChatbotQuery() {
     }
 
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String response;
 
     public User getUser() {
